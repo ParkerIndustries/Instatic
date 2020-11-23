@@ -37,6 +37,7 @@ function App() {
   const [modalStyle] = React.useState(getModalStyle);
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -79,8 +80,17 @@ function App() {
         displayName: username
       });
     })
-    .catch((error) => alert(error.message))
+    .catch((error) => alert(error.message));
+    setOpen(false);
   };
+
+  const signIn = (event => {
+    event.preventDefault();
+    auth.signInWithEmailAndPassword(email, password)
+    .catch((error) => alert(error.message));
+    setOpenSignIn(false);
+
+  })
 
   return (
     <div className="App">
@@ -116,6 +126,32 @@ function App() {
           </form>
         </div>
       </Modal>
+      <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
+        <div style={modalStyle} className={classes.paper}>
+          <form className="app__signup">
+            <center>
+              <img
+                className="app__headerImage"
+                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+                alt=""
+              />
+            </center>
+            <Input
+              placeholder="Email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              placeholder="Mot de passe"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button onClick={signIn}>Se connecter</Button>
+          </form>
+        </div>
+      </Modal>
       <div className="app__header">
         <img
           className="app__headerImage"
@@ -123,13 +159,20 @@ function App() {
           alt=""
         />
         {user ? (
-          <button className="app__headerButton" type="button" onClick={() => auth.signOut()}>
-            <strong>{username}/Déconnexion</strong>
-          </button>
+          <div className="app__loginContainer">
+            <button className="app__headerButton" type="button" onClick={() => auth.signOut()}>
+              <strong>{username}/Déconnexion</strong>
+            </button>
+          </div>
         ) : (
-          <button className="app__headerButton" type="button" onClick={() => setOpen(true)}>
-            <strong>Connexion/S'inscrire</strong>
+          <div className="app__loginContainer">
+          <button className="app__headerButton" type="button" onClick={() => setOpenSignIn(true)}>
+            <strong>Se connecter</strong>
           </button>
+          <button className="app__headerButton" type="button" onClick={() => setOpen(true)}>
+            <strong>S'inscrire</strong>
+          </button>
+          </div>
         )}
         
       </div>

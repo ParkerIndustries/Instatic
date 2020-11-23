@@ -14,13 +14,13 @@
   padding: 11px;
   border-bottom: 1px solid lightgray;
   background-color: white;
+  display: flex;
 }
 
 .app__headerButton {
-  position: absolute;
   right: 10px;
   border: none;
-  padding: 10px 25px;
+  padding: 10px;
   background-color: #fff;
   text-align: center;
   font-size: 16px;
@@ -30,4 +30,9 @@
 .app__signup {
   display: flex;
   flex-direction: column;
+}
+
+.app__loginContainer {
+  position: absolute;
+  right: 10px;
 }
