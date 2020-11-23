@@ -176,6 +176,8 @@ function App() {
         )}
         
       </div>
+      {user ? (
+      <div>
       {posts.map(({ id, post }) => (
         <Post
           key={id}
@@ -183,12 +185,8 @@ function App() {
           caption={post.caption}
           imageURL={post.imageURL}
         />
-      ))}
-      <Post
-        username="Mickael"
-        caption="Description"
-        imageURL="https://blog.uniclixapp.com/wp-content/uploads/2020/07/1-1-instagram-1024x1024-1-1.jpg"
-      />
+      ))}</div>
+      ) : (<div></div>)}
     </div>
   );
 }
