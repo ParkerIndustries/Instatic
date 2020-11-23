@@ -15,3 +15,19 @@
   border-bottom: 1px solid lightgray;
   background-color: white;
 }
+
+.app__headerButton {
+  position: absolute;
+  right: 10px;
+  border: none;
+  padding: 10px 25px;
+  background-color: #fff;
+  text-align: center;
+  font-size: 16px;
+  outline-style: none;
+}
+
+.app__signup {
+  display: flex;
+  flex-direction: column;
+}
