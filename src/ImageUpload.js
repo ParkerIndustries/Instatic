@@ -29,27 +29,19 @@ function ImageUpload({username}) {
                 alert(error.message);
             },
             () => {
-                console.log("----1");
-                console.log(image.name);
-                console.log("----1");
                 storage.ref("images/")
                 .child(image.name)
                 .getDownloadURL(url)
                 .then(url => {
-                    console.log("----2");
-                    console.log(url);
-                    console.log("----2");
                     db.collection("posts").add({
                         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                         caption: caption,
                         imageURL: url,
-                        username: username
+                        username: username,
                     });
-                    console.log("Check this ", url);
                     setProgress(0);
                     setCaption("");
                     setImage(null);
-                    setUrl("");
                 });
             }
         )
