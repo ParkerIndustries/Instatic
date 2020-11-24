@@ -9,9 +9,9 @@ function Post({postId, user, username, caption, imageURL}) {
     const [comment, setComment] = useState('');
 
     useEffect(() => {
-        let unsuscribe;
+        let unsubscribe;
         if (postId) {
-            unsuscribe = db
+            unsubscribe = db
             .collection("posts")
             .doc(postId)
             .collection("comments")
@@ -21,7 +21,7 @@ function Post({postId, user, username, caption, imageURL}) {
             })
         }
         return () => {
-            unsuscribe();
+            unsubscribe();
         };
     }, [postId]);
 
@@ -54,7 +54,7 @@ function Post({postId, user, username, caption, imageURL}) {
             </div>
             {user && (
                 <form className="post__commentBox">
-                    <input className="post__input" type="text" placeholder="Ajouter un ..." value={comment} onChange={(e) => setComment(e.target.value)}/>
+                    <input className="post__input" type="text" placeholder="Ajouter un commentaire..." value={comment} onChange={(e) => setComment(e.target.value)}/>
                     <button className="post__button" disabled={!comment} type="submit" onClick={postComment}>Publier</button>
                 </form>
             )}

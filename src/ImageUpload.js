@@ -10,6 +10,15 @@ function ImageUpload({username}) {
     const [progress, setProgress] = useState(0);
     const [caption, setCaption] = useState('');
 
+    var styleButton = { 
+        backgroundColor: 'red',
+        fontSize: 14,
+        border: "none",
+        background: "none",
+        color: "#0095f6",
+        fontWeight: "bold",
+    };
+
     const handleChange = (e) => {
         if (e.target.files[0]) {
             setImage(e.target.files[0]);
@@ -48,11 +57,19 @@ function ImageUpload({username}) {
     }
 
     return (
-        <div className="upload">
-            <progress className="upload__progress" value={progress} max="100" />
-            <Input type="text" placeholder='Description' onChange={event => setCaption(event.target.value)} value={caption}/>
-            <Input type="file" onChange={handleChange} />
-            <Button onClick={handleUpload}>Upload</Button>
+        <div>
+            <div className="upload fixed">
+                <progress className="upload__progress" value={progress} max="100" />
+                <input className="upload__text" type="text" placeholder='Description' onChange={event => setCaption(event.target.value)} value={caption}/>
+                <input className="upload__file" type="file" onChange={handleChange} />
+                <Button style={styleButton} onClick={handleUpload}>Upload</Button>
+            </div>
+            <div className="upload space">
+                <progress className="upload__progress" value={progress} max="100" />
+                <input className="upload__text" type="text" placeholder='Description' onChange={event => setCaption(event.target.value)} value={caption}/>
+                <input className="upload__file" type="file" onChange={handleChange} />
+                <Button style={styleButton} onClick={handleUpload}>Upload</Button>
+            </div>
         </div>
     )
 }

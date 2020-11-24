@@ -21,16 +21,27 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 300,
     backgroundColor: theme.palette.background.default,
     borderRadius: 3,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(10, 1, 10),
+    margin: theme.spacing(0, 0, 0),
     outlineStyle: "none",
     outlineWidth: 0,
     outlineColor: "transparent",
   },
 }));
+
+var styleButton = { 
+  backgroundColor: 'red',
+  fontSize: 14,
+  border: "none",
+  background: "none",
+  color: "#0095f6",
+  fontWeight: "bold",
+  margin: 20,
+};
 
 function App() {
   const classes = useStyles();
@@ -95,35 +106,35 @@ function App() {
 
   return (
     <div className="App">
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal className="app__modal" open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
             <center>
               <img
-                className="app__headerImage"
+                className="app__headerModal"
                 src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                 alt=""
               />
             </center>
-            <Input
+            <input
               placeholder="Nom d'utilisateur"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <Input
+            <input
               placeholder="Email"
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Input
+            <input
               placeholder="Mot de passe"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button onClick={signUp}>S'inscrire</Button>
+            <Button style={styleButton} onClick={signUp}>S'inscrire</Button>
           </form>
         </div>
       </Modal>
@@ -137,19 +148,19 @@ function App() {
                 alt=""
               />
             </center>
-            <Input
+            <input
               placeholder="Email"
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Input
+            <input
               placeholder="Mot de passe"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button onClick={signIn}>Se connecter</Button>
+            <Button style={styleButton} onClick={signIn}>Se connecter</Button>
           </form>
         </div>
       </Modal>
@@ -193,7 +204,7 @@ function App() {
       {user ? (
       <ImageUpload username={user.displayName}/>
       ) : (
-        <div></div>
+        <div><h3 className="app__visitors">Merci de vous connecter ou de vous inscrire pour poster ou commenter!</h3></div>
       )}
     </div>
   );
