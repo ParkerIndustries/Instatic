@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./Post";
+import ImageUpload from './ImageUpload';
 import { db, auth } from "./firebase";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,7 +63,7 @@ function App() {
 
   //Updates the page anytime the db has a new post.
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
+    db.collection("posts").orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
       setPosts(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -161,7 +162,7 @@ function App() {
         {user ? (
           <div className="app__loginContainer">
             <button className="app__headerButton" type="button" onClick={() => auth.signOut()}>
-              <strong>{username}/Déconnexion</strong>
+              <strong>{user.displayName}/Déconnexion</strong>
             </button>
           </div>
         ) : (
@@ -181,12 +182,18 @@ function App() {
       {posts.map(({ id, post }) => (
         <Post
           key={id}
+          postId={id}
           username={post.username}
           caption={post.caption}
           imageURL={post.imageURL}
         />
       ))}</div>
       ) : (<div></div>)}
+      {user ? (
+      <ImageUpload username={user.displayName}/>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
