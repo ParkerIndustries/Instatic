@@ -179,10 +179,11 @@ function App() {
       </div>
       {user ? (
       <div>
-      {posts.map(({ id, post }) => (
+      {posts.map(({id, post}) => (
         <Post
           key={id}
           postId={id}
+          user={user}
           username={post.username}
           caption={post.caption}
           imageURL={post.imageURL}
